@@ -50,30 +50,42 @@ Size of dog
 // to generate each puppy
 function Dog(name, gender, color, fur, size) {
   this.name = name;
-  this.sex = sex;
+  this.gender = gender;
   this.color = color;
   this.fur = fur;
   this.size = size;
 }
 
+var dogA = new Dog("A", "male", "black", "short", 35);
+var dogB = new Dog("B", "female", "white", "long", 55);
+var dogC = new Dog("C", "male", "brown", "short", 78);
+var dogD = new Dog("D", "female", "mixed", "long", 9);
+
 // The best approach will be to write helper functions for each property of the puppy
 
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
+  var name = father.name + mother.name + birthOrder;
   return name;
 }
 
 function dogGender() {
 // Odds of male or female are 50 : 50
+  var male = (Math.floor(Math.random() * 10) % 2 === 0);
+  if (male) {
+    gender = 'male';
+  } else {
+    gender = 'female';
+  }
   return gender;
 }
 
-function color(father, mother) {
+function dogColor(father, mother) {
 // Determine the color based on the rules above.
   return color;
 }
 
-function selectFur(father, mother) {
+function dogFur(father, mother) {
 // Determine length of fur based on the rules above.
   return fur;
 }
@@ -95,10 +107,21 @@ function litterSize(mother) {
   return litterSize;
 }
 
-function breedDogs(mother, father) {
+function breedDogs(father, mother) {
   // Generate an array of puppies!
   var litter = [];
 
 
   return litter;
+}
+
+function makePuppy(father, mother, 1) {
+  var name, gender, color, fur, size;
+  name = dogName(father, mother);
+  gender = dogGender();
+  color = dogColor(father, mother);
+  fur = dogFur(father, mother);
+  size = dogSize(father, mother);
+
+  return new Dog(name, gender, color, fur, size);
 }
