@@ -82,28 +82,45 @@ function dogGender() {
 
 function dogColor(father, mother) {
 // Determine the color based on the rules above.
+  var color = 'brown';
   return color;
 }
 
 function dogFur(father, mother) {
 // Determine length of fur based on the rules above.
+  var fur = 'short';
   return fur;
+}
+
+function dogSize(father, mother) {
+  var size;
+  var avg = Math.floor((father.size + mother.size) / 2);
+  var variance = Math.floor(avg / 10);
+  var adjustment = Math.floor(Math.random() * variance);
+  var direction = (Math.floor(Math.random() * 10) % 2 === 0);
+  if (direction) {
+    size = avg + adjustment;
+  } else {
+    size = avg - adjustment;
+  }
+  return size;
 }
 
 function litterSize(mother) {
 // determine litterSize
 // Here is a code snippet to get you started
-  var litterSize;
+  // var litterSize;
 
-  if (mother.size < 10) {
-    litterSize = 3;
-  } 
-  else if (mother.size < 26) {
-    litterSize = 5;
-  }
+  // if (mother.size < 10) {
+  //   litterSize = 3;
+  // } 
+  // else if (mother.size < 26) {
+  //   litterSize = 5;
+  // }
 
 // etc...
 // Remember to add the plus or minus variance!
+
   return litterSize;
 }
 
@@ -115,9 +132,9 @@ function breedDogs(father, mother) {
   return litter;
 }
 
-function makePuppy(father, mother, 1) {
+function makePuppy(father, mother, birthOrder) {
   var name, gender, color, fur, size;
-  name = dogName(father, mother);
+  name = dogName(father, mother, 1);
   gender = dogGender();
   color = dogColor(father, mother);
   fur = dogFur(father, mother);
