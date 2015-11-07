@@ -29,10 +29,17 @@ Color:
   Black                   Black 60%, White 20%, Brown 20%
   White                   White 60%, Black 20%, Brown 20%
   Brown                   Brown 80%, White 10%, Black 10%
-  Mixed                   Mixed 70%, 
+  Mixed                   Mixed 70%, Black 10%, White 10%, Brown 10%
 
   Each parent will contribute a color gene based on the above odds
   They will be combined based on the following genetic dominance traits
+  if father.color = 'black' {
+   60% colorContribution = black
+  }
+
+  fatherColorContribution, motherColorContribution
+  if colors are the same, puppies the same
+  order of dominance is Mixed, Black, Brown, White
 
 Fur:
   Dogs can have long or short fur with long fur being dominant.
