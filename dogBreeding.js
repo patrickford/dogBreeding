@@ -88,7 +88,22 @@ function dogColor(father, mother) {
 
 function dogFur(father, mother) {
 // Determine length of fur based on the rules above.
-  var fur = 'short';
+  var fur;
+  if (father.fur === mother.fur) {
+    fur = father.fur;
+  } else {
+    fur = "long"
+  }
+  var mutation = Math.floor(Math.random() * 10);
+  if (mutation === 1) {
+    console.log('fur mutation occured');
+    var long = (Math.floor(Math.random() * 10) % 2 === 0);
+    if (long) {
+      fur = 'long';
+    } else {
+      fur = 'short';
+    }
+  }
   return fur;
 }
 
