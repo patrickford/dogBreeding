@@ -87,10 +87,45 @@ function dogGender() {
   return gender;
 }
 
+/*  Parent Color            Genetic Odds
+  ------------------------------------
+  Black                   Black 60%, White 20%, Brown 20%
+  White                   White 60%, Black 20%, Brown 20%
+  Brown                   Brown 80%, White 10%, Black 10%
+  Mixed                   Mixed 70%, Black 10%, White 10%, Brown 10%
+*/
+
+function dogColorGene(dog) {
+  var colors = ['mixed', 'black', 'brown', 'white'];
+
+  var colorGenes = {
+    "mixed" : [70, 80, 90, 100],   
+    "black" : [0, 60, 80, 100],
+    "brown" : [0, 10, 90, 100],
+    "white" : [0, 20, 40, 100]
+  }
+
+  var dist = colorGenes[dog.color];
+
+  var random = Math.floor(Math.random() * 100);
+
+  for (var i = 0; i < dist.length; i++) {
+    if (random <= dist[i]) {
+      return color = colors[i];
+    }
+  }
+}
+
 function dogColor(father, mother) {
 // Determine the color based on the rules above.
-  var color = 'brown';
-  return color;
+  var colors = ['mixed', 'black', 'brown', 'white'];
+  var fatherGene = dogColorGene(father);
+  var motherGene = dogColorGene(mother);
+  if (colors.indexOf(motherGene) < colors.indexOf(fatherGene)) {
+    return colors[colors.indexOf(motherGene)];
+  } else {
+    return colors[colors.indexOf(fatherGene)];
+  }
 }
 
 function dogFur(father, mother) {
