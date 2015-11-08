@@ -1,12 +1,12 @@
 /* Dog Breeding
-------------
+---------------
 For this toy problem you will breed dogs by combining two dogs and generating puppies.
 
 The puppies will be subject to the following rules:
 
 Name:
   name = father's name + mother's name + order of birth in litter
-  example: father: "A" and mother: "B" have 3 puppies:
+  example: father: 'A' and mother: 'B' have 3 puppies:
   AB1, AB2, and AB3
 
 Gender: 
@@ -45,14 +45,14 @@ Fur:
   Dogs can have long or short fur with long fur being dominant.
   If both father and mother have the same length fur so will the puppies.
   If one has long and one has short, puppy will have long fur
-  Except for genetic mutations which happen 20% of the time where fur will be random.
+  Except for genetic mutations which happen 10% of the time where fur will be random.
 
 Size of dog
  Puppies will grow to the average size of their father and mother, plus or minus 20%
 
 */
 
-// Here is a construction function to create dog objects.
+// Here is a constructor function to create dog objects. 
 // Use it to create a few parent dogs to start, then use it in your breeding program
 // to generate each puppy
 function Dog(name, gender, color, fur, size) {
@@ -63,12 +63,19 @@ function Dog(name, gender, color, fur, size) {
   this.size = size;
 }
 
-var dogA = new Dog("A", "male", "black", "short", 35);
-var dogB = new Dog("B", "female", "white", "long", 55);
-var dogC = new Dog("C", "male", "brown", "short", 78);
-var dogD = new Dog("D", "female", "mixed", "long", 9);
-
+var dogA = new Dog('A', 'male', 'black', 'short', 35);
+var dogB = new Dog('B', 'female', 'white', 'long', 55);
+var dogC = new Dog('C', 'male', 'brown', 'short', 78);
+var dogD = new Dog('D', 'female', 'mixed', 'long', 9);
+var dogE = new Dog('E', 'male', 'white', 'short', 25);
+var dogF = new Dog('F', 'female', 'white', 'short', 40);
+var dogG = new Dog('G', 'male', 'brown', 'long', 90);
+var dogH = new Dog('H', 'female', 'mixed', 'short', 15);
 // The best approach will be to write helper functions for each property of the puppy
+
+function randomBoolean() {
+  return Math.random() < 0.5;
+}
 
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
@@ -78,7 +85,8 @@ function dogName(father, mother, birthOrder) {
 
 function dogGender() {
 // Odds of male or female are 50 : 50
-  var male = Math.random() < .5 ;
+  var gender;
+  var male = randomBoolean();
   if (male) {
     gender = 'male';
   } else {
@@ -98,18 +106,19 @@ function dogColorGene(dog) {
   var colors = ['mixed', 'black', 'brown', 'white'];
 
   var colorGenes = {
-    "mixed" : [70, 80, 90, 100],   
-    "black" : [0, 60, 80, 100],
-    "brown" : [0, 10, 90, 100],
-    "white" : [0, 20, 40, 100]
+    'mixed' : [70, 10, 10, 10],   
+    'black' : [0, 60, 20, 20],
+    'brown' : [0, 10, 80, 10],
+    'white' : [0, 20, 20, 60]
   }
 
-  var dist = colorGenes[dog.color];
-
+  var probability = colorGenes[dog.color];
+  var accumulator = 0;
   var random = Math.ceil(Math.random() * 100);
 
-  for (var i = 0; i < dist.length; i++) {
-    if (random <= dist[i]) {
+  for (var i = 0; i < probability.length; i++) {
+    accumulator += probability[i];
+    if (random <= accumulator) {
       return colors[i];
     }
   }
@@ -133,13 +142,13 @@ function dogFur(father, mother) {
   if (father.fur === mother.fur) {
     fur = father.fur;
   } else {
-    fur = "long"
+    fur = 'long'
   }
 
   var mutation = Math.floor(Math.random() * 10);
-  if (mutation <= 2) {
-    console.log('fur mutation occured');
-    var long = Math.random() < .5;
+  if (mutation < 1) {
+    console.log('fur mutation occured ' + mutation);
+    var long = randomBoolean();
     if (long) {
       fur = 'long';
     } else {
@@ -153,8 +162,8 @@ function dogSize(father, mother) {
   var size;
   var avg = Math.floor((father.size + mother.size) / 2);
   var variance = Math.floor(avg * 0.2);
-  var adjustment = Math.floor(Math.random() * variance);
-  var adjustUp = (Math.random() < 0.5);
+  var adjustment = Math.ceil(Math.random() * variance);
+  var adjustUp = randomBoolean(); 
   if (adjustUp) {
     size = avg + adjustment;
   } else {
@@ -165,35 +174,35 @@ function dogSize(father, mother) {
 
 
 function litterSize(mother) {
-  var litterSize;
+  var puppies;
   var variance;
 
   if (mother.size < 10) {
-    litterSize = 3;
+    puppies = 3;
     variance = 1;
   } 
   else if (mother.size >= 10 && mother.size <= 25) {
-    litterSize = 5;
+    puppies = 5;
     variance = 1;
   }
   else if (mother.size >= 26 && mother.size <= 50) {
-    litterSize = 7;
+    puppies = 7;
     variance = 2; 
   }
   else if (mother.size > 50) {
-    litterSize = 9;
+    puppies = 9;
     variance = 2;
   }
 
   var adjustment = Math.floor(Math.random() * variance);
-  var adjustUp = (Math.random() < 0.5);
+  var adjustUp = randomBoolean();
   if (adjustUp) {
-    litterSize = litterSize + adjustment;
+    puppies = puppies + adjustment;
   } else {
-    litterSize = litterSize - adjustment;
+    puppies = puppies - adjustment;
   }
 
-  return litterSize;
+  return puppies;
 }
 
 function makePuppy(father, mother, birthOrder) {
