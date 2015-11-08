@@ -26,16 +26,14 @@ Litter Size:
 Color:
   Parent Color            Genetic Odds
   ------------------------------------
-  Black                   Black 60%, White 20%, Brown 20%
-  White                   White 60%, Black 20%, Brown 20%
-  Brown                   Brown 80%, White 10%, Black 10%
-  Mixed                   Mixed 70%, Black 10%, White 10%, Brown 10%
+  Mixed                   Mixed 70%, Black 10%, White 10%, Brown 10%,
+  Black                   Mixed 10%, Black 60%, White 10%, Brown 20%
+  Brown                   Mixed 15%, Black 10%, White 5%,  Brown 70%
+  White                   Mixed 10%, Black 10%, White 60%, Brown 20%
 
   Each parent will contribute a color gene based on the above odds
   They will be combined based on the following genetic dominance traits
-  if father.color = 'black' {
-   60% colorContribution = black
-  }
+  if father.color = 'black' then there is a 60% chance his colorContribution will be black
 
   Each parent contributes a color gene
   if colors are the same, puppies are the same color
@@ -55,22 +53,25 @@ Size of dog
 // Here is a constructor function to create dog objects. 
 // Use it to create a few parent dogs to start, then use it in your breeding program
 // to generate each puppy
+
 function Dog(name, gender, color, fur, size) {
-  this.name = name;
+  this.name   = name;
   this.gender = gender;
-  this.color = color;
-  this.fur = fur;
-  this.size = size;
+  this.color  = color;
+  this.fur    = fur;
+  this.size   = size;
 }
 
-var dogA = new Dog('A', 'male', 'black', 'short', 35);
-var dogB = new Dog('B', 'female', 'white', 'long', 55);
-var dogC = new Dog('C', 'male', 'brown', 'short', 78);
-var dogD = new Dog('D', 'female', 'mixed', 'long', 9);
-var dogE = new Dog('E', 'male', 'white', 'short', 25);
+// Some starter dogs
+var dogA = new Dog('A', 'male',   'black', 'short', 35);
+var dogB = new Dog('B', 'female', 'white', 'long',  55);
+var dogC = new Dog('C', 'male',   'brown', 'short', 78);
+var dogD = new Dog('D', 'female', 'mixed', 'long',  9);
+var dogE = new Dog('E', 'male',   'white', 'short', 25);
 var dogF = new Dog('F', 'female', 'white', 'short', 40);
-var dogG = new Dog('G', 'male', 'brown', 'long', 90);
+var dogG = new Dog('G', 'male',   'brown', 'long',  90);
 var dogH = new Dog('H', 'female', 'mixed', 'short', 15);
+
 // The best approach will be to write helper functions for each property of the puppy
 
 function randomBoolean() {
@@ -85,31 +86,18 @@ function dogName(father, mother, birthOrder) {
 
 function dogGender() {
 // Odds of male or female are 50 : 50
-  var gender;
-  var male = randomBoolean();
-  if (male) {
-    gender = 'male';
-  } else {
-    gender = 'female';
-  }
+  var gender = randomBoolean() ? 'male' : 'female';
   return gender;
 }
 
-/* Parent Color           Genetic Odds
-  ------------------------------------
-  Black                   Black 60%, White 20%, Brown 20%
-  White                   White 60%, Black 20%, Brown 20%
-  Brown                   Brown 80%, White 10%, Black 10%
-  Mixed                   Mixed 70%, Black 10%, White 10%, Brown 10%
-*/
 function dogColorGene(dog) {
   var colors = ['mixed', 'black', 'brown', 'white'];
 
   var colorGenes = {
     'mixed' : [70, 10, 10, 10],   
-    'black' : [0, 60, 20, 20],
-    'brown' : [0, 10, 80, 10],
-    'white' : [0, 20, 20, 60]
+    'black' : [10, 60, 10, 20],
+    'brown' : [15, 10, 5,  70],
+    'white' : [10, 10, 60, 20]
   }
 
   var probability = colorGenes[dog.color];
@@ -127,33 +115,22 @@ function dogColorGene(dog) {
 function dogColor(father, mother) {
 // Determine the color based on the rules above.
   var colors = ['mixed', 'black', 'brown', 'white'];
+
   var fatherGene = dogColorGene(father);
   var motherGene = dogColorGene(mother);
-  if (colors.indexOf(motherGene) < colors.indexOf(fatherGene)) {
-    return colors[colors.indexOf(motherGene)];
-  } else {
-    return colors[colors.indexOf(fatherGene)];
-  }
+
+  return (colors.indexOf(motherGene) < colors.indexOf(fatherGene)) ? 
+          colors[colors.indexOf(motherGene)] : colors[colors.indexOf(fatherGene)];
 }
 
 function dogFur(father, mother) {
 // Determine length of fur based on the rules above.
   var fur;
-  if (father.fur === mother.fur) {
-    fur = father.fur;
-  } else {
-    fur = 'long'
-  }
+  fur = father.fur === mother.fur ? father.fur : 'long';
 
   var mutation = Math.floor(Math.random() * 10);
   if (mutation < 1) {
-    console.log('fur mutation occured ' + mutation);
-    var long = randomBoolean();
-    if (long) {
-      fur = 'long';
-    } else {
-      fur = 'short';
-    }
+    fur = randomBoolean() ? 'long' : 'short';
   }
   return fur;
 }
@@ -163,15 +140,9 @@ function dogSize(father, mother) {
   var avg = Math.floor((father.size + mother.size) / 2);
   var variance = Math.floor(avg * 0.2);
   var adjustment = Math.ceil(Math.random() * variance);
-  var adjustUp = randomBoolean(); 
-  if (adjustUp) {
-    size = avg + adjustment;
-  } else {
-    size = avg - adjustment;
-  }
+  size = randomBoolean() ? avg + adjustment : avg - adjustment
   return size;
 }
-
 
 function litterSize(mother) {
   var puppies;
@@ -195,13 +166,7 @@ function litterSize(mother) {
   }
 
   var adjustment = Math.floor(Math.random() * variance);
-  var adjustUp = randomBoolean();
-  if (adjustUp) {
-    puppies = puppies + adjustment;
-  } else {
-    puppies = puppies - adjustment;
-  }
-
+  puppies += randomBoolean() ? adjustment : -adjustment;
   return puppies;
 }
 
