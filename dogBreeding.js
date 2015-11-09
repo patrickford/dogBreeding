@@ -95,29 +95,32 @@ function dogGender() {
   return gender;
 }
 
-function dogColorGene(dog) {
-  var colors = ['mixed', 'black', 'brown', 'white'];
 
-  var colorGenes = {
-    'mixed' : [70, 10, 10, 10],   
-    'black' : [10, 60, 10, 20],
-    'brown' : [15, 10, 5,  70],
-    'white' : [10, 10, 60, 20]
-  }
-
-  var probability = colorGenes[dog.color];
-  var accumulator = 0;
-  var random = Math.ceil(Math.random() * 100);
-
-  for (var i = 0; i < probability.length; i++) {
-    accumulator += probability[i];
-    if (random <= accumulator) {
-      return colors[i];
-    }
-  }
-}
 
 function dogColor(father, mother) {
+
+  function dogColorGene(dog) {
+    var colors = ['mixed', 'black', 'brown', 'white'];
+
+    var colorGenes = {
+      'mixed' : [70, 10, 10, 10],   
+      'black' : [10, 60, 10, 20],
+      'brown' : [15, 10, 5,  70],
+      'white' : [10, 10, 60, 20]
+    }
+
+    var probability = colorGenes[dog.color];
+    var accumulator = 0;
+    var random = Math.ceil(Math.random() * 100);
+
+    for (var i = 0; i < probability.length; i++) {
+      accumulator += probability[i];
+      if (random <= accumulator) {
+        return colors[i];
+      }
+    }
+  }
+
 // Determine the color based on the rules above.
   var colors = ['mixed', 'black', 'brown', 'white'];
 
