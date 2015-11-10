@@ -1,13 +1,17 @@
+/* Prepared by Patrick Ford
+/* For Student Mentor Group Session
+
 /* Dog Breeding
 ---------------
-For this toy problem you will breed dogs by combining two dogs and generating puppies.
+For this toy problem you will breed dogs by combining two dogs 
+and generating puppies.
 
 The puppies will be subject to the following rules:
 
 Name:
   name = father's name + mother's name + order of birth in litter
   example: father: 'A' and mother: 'B' have 3 puppies:
-  AB1, AB2, and AB3
+  [A-B-1], [A-B-2], and [A-B-3]
 
 Gender: 
   Odds of generating a male or female is 50%
@@ -32,7 +36,7 @@ Color:
   White           Mixed 10%, Black 10%, White 60%, Brown 20%
 
   Each parent will contribute a color gene based on the above odds
-  They will be combined based on the following genetic dominance traits
+  They will be combined based on the following genetic dominance traits:
   if father.color = 'black' then there is a 60% chance his colorContribution will be black
 
   Each parent contributes a color gene
@@ -85,7 +89,7 @@ function randomBoolean(percentage) {
 
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
-  var name = father.name + mother.name + birthOrder;
+  var name = '[' + father.name + '-' + mother.name + '-' + birthOrder + ']';
   return name;
 }
 
@@ -95,20 +99,16 @@ function dogGender() {
   return gender;
 }
 
-
-
 function dogColor(father, mother) {
+  var colors = ['mixed', 'black', 'brown', 'white'];
 
   function dogColorGene(dog) {
-    var colors = ['mixed', 'black', 'brown', 'white'];
-
     var colorGenes = {
       'mixed' : [70, 10, 10, 10],   
       'black' : [10, 60, 10, 20],
       'brown' : [15, 10, 5,  70],
       'white' : [10, 10, 60, 20]
     }
-
     var probability = colorGenes[dog.color];
     var accumulator = 0;
     var random = Math.ceil(Math.random() * 100);
@@ -122,8 +122,6 @@ function dogColor(father, mother) {
   }
 
 // Determine the color based on the rules above.
-  var colors = ['mixed', 'black', 'brown', 'white'];
-
   var fatherGene = colors.indexOf(dogColorGene(father));
   var motherGene = colors.indexOf(dogColorGene(mother));
 
@@ -178,6 +176,7 @@ function litterSize(mother) {
 }
 
 function makePuppy(father, mother, birthOrder) {
+
   var name    = dogName(father, mother, birthOrder);
   var gender  = dogGender();
   var color   = dogColor(father, mother);
@@ -188,9 +187,12 @@ function makePuppy(father, mother, birthOrder) {
 }
 
 function breedDogs(father, mother) {
-  // Generate an array of puppies!
+  if (father.gender === mother.gender) {
+    return 'Dogs must be opposite sex to breed.';
+  } 
+  // Generate an array of puppy objects!
   var litter = [];
-  for (var i = 0; i < litterSize(mother); i++) {
+  for (var i = 1; i <= litterSize(mother); i++) {
     litter.push(makePuppy(father, mother, i));
   }
   return litter;
