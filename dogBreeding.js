@@ -197,3 +197,58 @@ function breedDogs(father, mother) {
   }
   return litter;
 }
+
+
+/* Breeding program to create very large dogs
+   
+   Use our previously created higher order functions such as 'filter' where appropriate.
+
+   Exercise 1: Starting with any two dogs, determine how many generations it takes to
+               create a dog weighing more than 100 lbs.
+*/
+
+var litter = breedDogs(dogE, dogF);
+
+var males = filter(litter, function(element) {
+  return element.gender === 'male';
+});
+
+var females = filter(litter, function(element) {
+  return element.gender === 'female';
+});
+
+function largestDog(litter) {
+  var largestDog;
+  var heaviest = 0;
+  for (var i = 0; i < litter.length; i++) {
+    if (litter[i].size > heaviest) {
+      largestDog = litter[i];
+      heaviest = largestDog.size;
+    }
+  }
+  return largestDog;
+}
+
+function fatDogs(father, mother) {
+  var generations = 0;
+  var litter, males, females; 
+   
+  var fattest = father.size > mother.size ? father.size : mother.size;
+
+  while fattest < 100 {
+    litter = breedDogs(father, mother);
+    generations++;
+
+    males = filter(litter, function(element) {
+      return element.gender === 'male';
+    });
+
+    females = filter(litter, function(element) {
+      return element.gender === 'female';
+    });
+    father = largestDog(males);
+    mother = largestDog(females);
+
+  }
+  return ('Generations: ' + generations + 'Weight: ' + fattest);
+}
