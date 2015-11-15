@@ -22,19 +22,19 @@ Litter Size:
 
   Size of Mother   Average Litter
 
-  - < 10 lbs        3 puppies with 10% chance of plus or minus 1
-  - 10 to 25 lbs    5 puppies with 10% chance of + or - 1
-  - 26 to 50 lbs    7 puppies with 10% chance of + or - 2
-  - 51 to 90 lbs    9 puppies with 10% chance of + or - 2
+  - < 10 lbs = 3 puppies with 10% chance of plus or minus 1
+  - 10 to 25 lbs = 5 puppies with 10% chance of + or - 1
+  - 26 to 50 lbs = 7 puppies with 10% chance of + or - 2
+  - 51 to 90 lbs = 9 puppies with 10% chance of + or - 2
 
 Color:
 ------
   Parent Color    Genetic Odds
 
-  - Mixed           Mixed 70%, Black 10%, White 10%, Brown 10%,
-  - Black           Mixed 10%, Black 60%, White 10%, Brown 20%
-  - Brown           Mixed 15%, Black 10%, White 5%,  Brown 70%
-  - White           Mixed 10%, Black 10%, White 60%, Brown 20%
+  - Mixed = Mixed 70%, Black 10%, White 10%, Brown 10%,
+  - Black = Mixed 10%, Black 60%, White 10%, Brown 20%
+  - Brown = Mixed 15%, Black 10%, White 5%,  Brown 70%
+  - White = Mixed 10%, Black 10%, White 60%, Brown 20%
 
   Each parent will contribute a color gene based on the above odds
   They will be combined based on the following genetic dominance traits:
