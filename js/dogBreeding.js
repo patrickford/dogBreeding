@@ -289,9 +289,9 @@ function pureColorDogs(father, mother, pureColor) {
         return element.gender === 'male';
       });
 
-      for (var dogs = 0; dogs < males.length; dogs++) {
-        if (preferredColor.indexOf(males[dogs].color) < preferredColor.indexOf(father.color)) {
-          father = males[dogs];
+      for (var i = 0; i < males.length; i++) {
+        if (preferredColor.indexOf(males[i].color) < preferredColor.indexOf(father.color)) {
+          father = males[i];
         }
       }
     }
@@ -302,9 +302,9 @@ function pureColorDogs(father, mother, pureColor) {
         return element.gender === 'female';
       });
 
-      for (var dogs = 0; dogs < females.length; dogs++) {
-        if (preferredColor.indexOf(females[dogs].color) < preferredColor.indexOf(mother.color)) {
-          mother = females[dogs];
+      for (var j = 0; j < females.length; j++) {
+        if (preferredColor.indexOf(females[j].color) < preferredColor.indexOf(mother.color)) {
+          mother = females[j];
         }
       }
     }
