@@ -1,22 +1,41 @@
 $(document).ready(function() {
    
   function showLitter(litter) {
-    var dogRow;
-    $(".dogs").append("<table class='table table-striped'>");
-    $(".dogs").append("<thead><tr><th>Name</th><th>Gender</th><th>Color</th><th>Fur</th><th>Size</th></tr></thead>")
+    var dogTable;
+
+    dogTable = "<table class='table table-striped table-hover'>";
+    dogTable += "<thead><tr>";
+    dogTable += "<th>Name</th>";
+    dogTable += "<th>Gender</th>";
+    dogTable += "<th>Color</th>";
+    dogTable += "<th>Fur</th>"; 
+    dogTable += "<th>Size</th>";
+    dogTable += "</tr></thead>";    
+
     for (var i = 0; i < litter.length; i++) {
-      dogRow = "<tr>";
-      dogRow += "<td>" + litter[i].name + "</td>";
-      dogRow += "<td>" + litter[i].gender + "</td>";
-      dogRow += "<td>" + litter[i].color + "</td>";
-      dogRow += "<td>" + litter[i].fur + "</td>"; 
-      dogRow += "<td>" + litter[i].size + "</td>";
-      dogRow += "</tr";
-      $(".dogs").append(dogRow);
+      dogTable += "<tr>";
+      dogTable += "<td>" + litter[i].name   + "</td>";
+      dogTable += "<td>" + litter[i].gender + "</td>";
+      dogTable += "<td>" + litter[i].color  + "</td>";
+      dogTable += "<td>" + litter[i].fur    + "</td>"; 
+      dogTable += "<td>" + litter[i].size   + "</td>";
+      dogTable += "</tr>";
     }
-    $(".dogs").append("</table>"); 
+    dogTable += "</table>";
+    
+    $(".dogs").append(dogTable); 
   }
 
-  showLitter(litter);
+  function showLargeBreeding() {
+
+  }
+
+  function showColorBreeding() {
+
+  }
+
+  showLitter(litter);  
 
 });
+
+
