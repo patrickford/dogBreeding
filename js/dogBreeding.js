@@ -76,6 +76,7 @@ var dogF = new Dog('F', 'female', 'white', 'short', 40);
 var dogG = new Dog('G', 'male',   'brown', 'long',  90);
 var dogH = new Dog('H', 'female', 'mixed', 'short', 15);
 
+var litter = [dogA, dogB, dogC, dogD, dogE, dogF, dogG, dogH]
 
 function randomBoolean(percentage) {
   if (percentage === undefined) {
@@ -229,38 +230,31 @@ function fatDogs(father, mother, goal) {
   var fattest = father.size > mother.size ? father.size : mother.size;
 
   // while (fattest < goal) {
-  while (x < 10) {
+  while (fattest < goal) {
 
     // Breed a new litter and increment generation counter
     litter = breedDogs(father, mother);
     generation++;
 
-    x++;
-
-    console.log(generation);
-
-    // If the litter contains males use the largest if he is bigger than the current father
+    // If the litter contains males use the largest male puppy as the father
     if (some(litter, function(element) { return element.gender === 'male'; })) {
       males = filter(litter, function(element) {
         return element.gender === 'male';
       });
 
-      largest = getLargestDog(males);
-      father = largest > father ? largest : father;
+      father = getLargestDog(males);
     }
 
-    // If the litter contains females use the largest if she is bigger than the current mother
+    // If the litter contains females use the largest female puppy as the mother
     if (some(litter, function(element) { return element.gender === 'female'; })) {
       females = filter(litter, function(element) {
         return element.gender === 'female';
       }); 
 
-      largest = getLargestDog(females);
-      mother = largest > mother ? largest : mother;
+      mother = getLargestDog(females);
     }
 
     fattest = father.size > mother.size ? father.size : mother.size;
-    console.log(fattest);
   }
 
   console.log('Generations: ' + generation + '  Weight: ' + fattest);
