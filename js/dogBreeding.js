@@ -176,7 +176,6 @@ function litterSize(mother) {
 }
 
 function makePuppy(father, mother, birthOrder) {
-
   var name    = dogName(father, mother, birthOrder);
   var gender  = dogGender();
   var color   = dogColor(father, mother);
