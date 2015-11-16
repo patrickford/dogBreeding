@@ -11,7 +11,7 @@ The puppies will be subject to the following rules:
 Name:
   name = father's name + mother's name + order of birth in litter
   example: father: 'A' and mother: 'B' have 3 puppies:
-  [A-B-1], [A-B-2], and [A-B-3]
+  AB1|, AB2|, and AB3|
 
 Gender: 
   Odds of generating a male or female is 50%
@@ -89,7 +89,7 @@ function randomBoolean(percentage) {
 
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
-  var name = '[' + father.name + '-' + mother.name + '-' + birthOrder + ']';
+  var name = father.name + mother.name + birthOrder + '|';
   return name;
 }
 
@@ -225,19 +225,26 @@ function fatDogs(father, mother, goal) {
   var males = [];
   var females = [];
   var largest;
-
+  var x = 0;
   var fattest = father.size > mother.size ? father.size : mother.size;
 
-  while (fattest < goal) {
+  // while (fattest < goal) {
+  while (x < 10) {
+
     // Breed a new litter and increment generation counter
     litter = breedDogs(father, mother);
     generation++;
+
+    x++;
+
+    console.log(generation);
 
     // If the litter contains males use the largest if he is bigger than the current father
     if (some(litter, function(element) { return element.gender === 'male'; })) {
       males = filter(litter, function(element) {
         return element.gender === 'male';
       });
+
       largest = getLargestDog(males);
       father = largest > father ? largest : father;
     }
@@ -247,11 +254,13 @@ function fatDogs(father, mother, goal) {
       females = filter(litter, function(element) {
         return element.gender === 'female';
       }); 
+
       largest = getLargestDog(females);
-      mother = largest > mother ? mother : father;
+      mother = largest > mother ? largest : mother;
     }
 
     fattest = father.size > mother.size ? father.size : mother.size;
+    console.log(fattest);
   }
 
   console.log('Generations: ' + generation + '  Weight: ' + fattest);
