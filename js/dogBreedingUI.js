@@ -28,16 +28,16 @@ $(document).ready(function() {
     $(".dogs").append(dogTable); 
   }
 
+// Large Breeding
   $("#large-breeding").click(function(e) {
     e.preventDefault();
     var litter = fatDogs(dogC, dogD);
-    console.log("fatDogs called");
     showLitter(litter);
     return false;
   });
 
+// Color Breeding
   $("#color-breeding").click(function(e) {
-    $("#color-breeding").on
     e.preventDefault();
     var litter = pureColorDogs(dogC, dogD, "white");
     showLitter(litter);
