@@ -90,7 +90,8 @@ function randomBoolean(percentage) {
 
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
-  var name = father.name + mother.name + birthOrder + '|';
+  // var name = father.name + mother.name + birthOrder + '|';
+  var name = "temp";
   return name;
 }
 
