@@ -1,6 +1,8 @@
 $(document).ready(function() {
    
   function showLitter(litter) {
+    $(".dogs").empty(); 
+
     var dogTable;
 
     dogTable = "<table class='table table-striped table-hover'>";
@@ -42,7 +44,7 @@ $(document).ready(function() {
     return false;
   });
 
-  // showLitter(litter);  
+  showLitter(litter);  
 
 });
 
