@@ -77,6 +77,7 @@ var dogG = new Dog('G', 'male',   'brown', 'long',  90);
 var dogH = new Dog('H', 'female', 'mixed', 'short', 15);
 
 var litter = [dogA, dogB, dogC, dogD, dogE, dogF, dogG, dogH]
+litter = sortByGender(litter);
 
 function randomBoolean(percentage) {
   if (percentage === undefined) {
@@ -195,6 +196,7 @@ function breedDogs(father, mother) {
   for (var i = 1; i <= litterSize(mother); i++) {
     litter.push(makePuppy(father, mother, i));
   }
+  litter = sortByGender(litter);
   return litter;
 }
 
@@ -206,6 +208,19 @@ function breedDogs(father, mother) {
    Exercise 1: Starting with any two dogs, determine how many generations it takes to
                create a dog weighing more than 100 lbs.
 */
+
+function sortByGender(litter) {
+  litter.sort(function(a, b) {
+    if (a.gender > b.gender) {
+      return 1;
+    }
+    if (a.gender < b.gender) {
+      return -1;
+    }
+    return 0;
+  });
+  return litter;
+}
 
 function getLargestDog(litter) {
   var largestDog;
@@ -220,7 +235,7 @@ function getLargestDog(litter) {
 }
 
 function fatDogs(father, mother, goal) {
-  goal = goal ? goal : 100;
+  goal = goal || 100;
   var generation = 0;
   var litter = [];
   var males = [];
@@ -258,8 +273,9 @@ function fatDogs(father, mother, goal) {
   }
 
   console.log('Generations: ' + generation + '  Weight: ' + fattest);
-  return litter;
-}
+
+  litter = sortByGender(litter);
+  return litter;}
 
 
 function pureColorDogs(father, mother, pureColor) {
@@ -270,7 +286,7 @@ function pureColorDogs(father, mother, pureColor) {
   var allSameColor = false;
 
   var colorOrder = {
-    white : ['white', 'black', 'mixed', 'brown'],
+    white : ['white', 'brown', 'black', 'mixed'],
     black : ['black', 'brown', 'mixed', 'white'],
     brown : ['brown', 'mixed', 'black', 'white'],
     mixed : ['mixed', 'brown', 'white', 'black']
@@ -315,5 +331,6 @@ function pureColorDogs(father, mother, pureColor) {
   }
 
   console.log('Generations: ' + generation);
-  return litter;
-}
+
+  litter = sortByGender(litter);
+  return litter;}
