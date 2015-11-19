@@ -41,7 +41,8 @@ $(document).ready(function() {
 // Large Breeding
   $("#large-breeding").click(function(e) {
     e.preventDefault();
-    var litter = fatDogs(dogC, dogD);
+    var maxSize = $("#maxSize").val()
+    var litter = fatDogs(dogC, dogD, maxSize);
     showLitter(litter);
     return false;
   });
@@ -49,7 +50,8 @@ $(document).ready(function() {
 // Color Breeding
   $("#color-breeding").click(function(e) {
     e.preventDefault();
-    var litter = pureColorDogs(dogC, dogD, "white");
+    var litterColor = $("input[name=colors]:checked").val();
+    var litter = pureColorDogs(dogC, dogD, litterColor);
     showLitter(litter);
     return false;
   });

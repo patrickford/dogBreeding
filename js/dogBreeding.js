@@ -9,9 +9,7 @@ and generating puppies.
 The puppies will be subject to the following rules:
 
 Name:
-  name = father's name + mother's name + order of birth in litter
-  example: father: 'A' and mother: 'B' have 3 puppies:
-  AB1|, AB2|, and AB3|
+  name = unique index number of each dog bred during session
 
 Gender: 
   Odds of generating a male or female is 50%
@@ -67,14 +65,16 @@ function Dog(name, gender, color, fur, size) {
 }
 
 // Some starter dogs
-var dogA = new Dog('A', 'male',   'black', 'short', 35);
-var dogB = new Dog('B', 'female', 'white', 'long',  55);
-var dogC = new Dog('C', 'male',   'brown', 'short', 78);
-var dogD = new Dog('D', 'female', 'mixed', 'long',  9);
-var dogE = new Dog('E', 'male',   'white', 'short', 25);
-var dogF = new Dog('F', 'female', 'white', 'short', 40);
-var dogG = new Dog('G', 'male',   'brown', 'long',  90);
-var dogH = new Dog('H', 'female', 'mixed', 'short', 15);
+var dogA = new Dog(1, 'male',   'black', 'short', 35);
+var dogB = new Dog(2, 'female', 'white', 'long',  55);
+var dogC = new Dog(3, 'male',   'brown', 'short', 78);
+var dogD = new Dog(4, 'female', 'mixed', 'long',  9);
+var dogE = new Dog(5, 'male',   'white', 'short', 25);
+var dogF = new Dog(6, 'female', 'white', 'short', 40);
+var dogG = new Dog(7, 'male',   'brown', 'long',  90);
+var dogH = new Dog(8, 'female', 'mixed', 'short', 15);
+
+var dogIndex = 9;
 
 var litter = [dogA, dogB, dogC, dogD, dogE, dogF, dogG, dogH]
 litter = sortByGender(litter);
@@ -92,7 +92,7 @@ function randomBoolean(percentage) {
 function dogName(father, mother, birthOrder) {
 // Combine father, mother, an birth order to generate dog's name
   // var name = father.name + mother.name + birthOrder + '|';
-  var name = "temp";
+  var name = dogIndex++;
   return name;
 }
 
