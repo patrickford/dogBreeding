@@ -65,14 +65,14 @@ function Dog(name, gender, color, fur, size) {
 }
 
 // Some starter dogs
-var dogA = new Dog(1, 'male',   'black', 'short', 35);
-var dogB = new Dog(2, 'female', 'white', 'long',  55);
-var dogC = new Dog(3, 'male',   'brown', 'short', 78);
-var dogD = new Dog(4, 'female', 'mixed', 'long',  9);
-var dogE = new Dog(5, 'male',   'white', 'short', 25);
-var dogF = new Dog(6, 'female', 'white', 'short', 40);
-var dogG = new Dog(7, 'male',   'brown', 'long',  90);
-var dogH = new Dog(8, 'female', 'mixed', 'short', 15);
+var dogA = new Dog(1, 'female', 'white', 'long',  55);
+var dogB = new Dog(2, 'female', 'mixed', 'long',   9);
+var dogC = new Dog(3, 'female', 'black', 'short', 40);
+var dogD = new Dog(4, 'female', 'brown', 'short', 13);
+var dogE = new Dog(5, 'male',   'black', 'long',  35);
+var dogF = new Dog(6, 'male',   'brown', 'long',   8);
+var dogG = new Dog(7, 'male',   'white', 'short', 14);
+var dogH = new Dog(8, 'male',   'mixed', 'short', 90);
 
 var dogIndex = 9;
 
@@ -89,9 +89,8 @@ function randomBoolean(percentage) {
 
 // The best approach will be to write helper functions for each property of the puppy
 
-function dogName(father, mother, birthOrder) {
-// Combine father, mother, an birth order to generate dog's name
-  // var name = father.name + mother.name + birthOrder + '|';
+function dogName() {
+//  name = unique index number of each dog bred during session
   var name = dogIndex++;
   return name;
 }
@@ -192,7 +191,7 @@ function breedDogs(father, mother) {
     return 'Dogs must be opposite sex to breed.';
   } 
   // Generate an array of puppy objects!
-  var litter = [];
+  litter = [];
   for (var i = 1; i <= litterSize(mother); i++) {
     litter.push(makePuppy(father, mother, i));
   }
@@ -237,7 +236,6 @@ function getLargestDog(litter) {
 function fatDogs(father, mother, goal) {
   goal = goal || 100;
   var generation = 0;
-  var litter = [];
   var males = [];
   var females = [];
   var largest;
@@ -275,12 +273,12 @@ function fatDogs(father, mother, goal) {
   console.log('Generations: ' + generation + '  Weight: ' + fattest);
 
   litter = sortByGender(litter);
-  return litter;}
+  return litter;
+}
 
 
 function pureColorDogs(father, mother, pureColor) {
   var generation = 0;
-  var litter = [];
   var males = [];  
   var females = [];
   var allSameColor = false;
@@ -333,4 +331,5 @@ function pureColorDogs(father, mother, pureColor) {
   console.log('Generations: ' + generation);
 
   litter = sortByGender(litter);
-  return litter;}
+  return litter;
+}

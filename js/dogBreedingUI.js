@@ -41,23 +41,37 @@ $(document).ready(function() {
 // Large Breeding
   $("#large-breeding").click(function(e) {
     e.preventDefault();
-    var maxSize = $("#maxSize").val()
-    var litter = fatDogs(dogC, dogD, maxSize);
-    showLitter(litter);
+    var fatherIndex = $("input[name=male]:checked").val();
+    var motherIndex = $("input[name=female]:checked").val();   
+    var maxSize = $("#maxSize").val();
+
+    if (!fatherIndex || !motherIndex) {
+      alert('You must first choose a breeding pair,');
+    } else {
+      litter = fatDogs(litter[fatherIndex], litter[motherIndex], maxSize);
+      showLitter(litter);
+    }
     return false;
   });
 
 // Color Breeding
   $("#color-breeding").click(function(e) {
     e.preventDefault();
+    var fatherIndex = $("input[name=male]:checked").val();
+    var motherIndex = $("input[name=female]:checked").val();
     var litterColor = $("input[name=colors]:checked").val();
-    var litter = pureColorDogs(dogC, dogD, litterColor);
-    showLitter(litter);
+
+    if (!fatherIndex || !motherIndex) {
+      alert('You must first choose a breeding pair,');
+    } else {
+      litter = pureColorDogs(litter[fatherIndex], litter[motherIndex], litterColor);
+      showLitter(litter);
+    }
     return false;
   });
 
   showLitter(litter);  
-
+  
 });
 
 
