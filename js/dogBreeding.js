@@ -108,7 +108,7 @@ function dogColor(father, mother) {
     var colorGenes = {
       mixed : [70, 10, 10, 10],   
       black : [ 5, 80, 10,  5],
-      brown : [15, 10, 70,  5],
+      brown : [10, 10, 70, 10],
       white : [ 5,  5, 10, 80]
     }
     var probability = colorGenes[dog.color];
@@ -285,7 +285,7 @@ function pureColorDogs(father, mother, pureColor) {
 
   var colorOrder = {
     white : ['white', 'brown', 'black', 'mixed'],
-    black : ['black', 'brown', 'mixed', 'white'],
+    black : ['black', 'brown', 'white', 'mixed'],
     brown : ['brown', 'mixed', 'black', 'white'],
     mixed : ['mixed', 'brown', 'white', 'black']
   }
