@@ -18,20 +18,17 @@
     <div class="container">
       <h1>Dog Breeding</h1>
       <hr>
-      <h2>Litter</h2>
-      <div id="dogs"></div>
-
       <div class="row">
         <div class="col-sm-6">
           <div class="programs panel panel-primary">
             <div class="panel-heading">Large Size Breeding</div>
             <div class="panel-body">
-              <form>
+              <form class="form-inline">
                 <div class="form-group">
                   <label for="maxSize">Maximum Size</label>
                   <input type="maxSize" class="form-control" id="maxSize" placeholder="Maximum Size">
                 </div>
-                <button id="large-breeding" type="submit" class="btn btn-primary">Submit</button>
+                <button id="large-breeding" type="submit" class="btn btn-sm btn-primary">Submit</button>
               </form>          
             </div>
           </div>
@@ -42,7 +39,6 @@
             <div class="panel-heading">Pure Color Breeding</div>
             <div class="panel-body">
               <form>
-                <br>
                 <div class="row">
                   <div class="col-xs-12">
                     <label class="radio-inline">
@@ -61,20 +57,19 @@
                       <input type="radio" name="colors" id="mixed" value="mixed">
                       Mixed
                     </label>
-                  </div>
-                </div>
-                <br><br>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <button id="color-breeding" type="submit" class="btn btn-primary">
+                    <button id="color-breeding" type="submit" class="btn btn-sm btn-primary">
                       Submit
                     </button>
-                  </div>
-                </div>
+                  </div>                   
+                </div>  
               </form>
             </div>          
           </div>        
         </div>  
+
+        <h3>Litter<small><span id="generations"></span></small></h3>
+        <div id="dogs"></div>
+
       </div>    
     </div>
   </body>

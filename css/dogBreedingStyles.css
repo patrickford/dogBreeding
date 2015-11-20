@@ -1,4 +1,8 @@
 
 .programs {
-  height: 200px;
+  height: 100px;
+}
+
+#color-breeding, #large-breeding {
+  margin-left: 30px;
 }

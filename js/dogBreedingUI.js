@@ -48,15 +48,17 @@ $(document).ready(function() {
     if (!fatherIndex || !motherIndex) {
       alert('You must first choose a breeding pair,');
     } else {
-      litter = fatDogs(litter[fatherIndex], litter[motherIndex], maxSize);
+      generations = fatDogs(litter[fatherIndex], litter[motherIndex], maxSize);
       showLitter(litter);
     }
+    $("#generations").empty().append("  --  " + generations + " Generations");
     return false;
   });
 
 // Color Breeding
   $("#color-breeding").click(function(e) {
     e.preventDefault();
+    $("#generations").empty();
     var fatherIndex = $("input[name=male]:checked").val();
     var motherIndex = $("input[name=female]:checked").val();
     var litterColor = $("input[name=colors]:checked").val();
@@ -64,9 +66,10 @@ $(document).ready(function() {
     if (!fatherIndex || !motherIndex) {
       alert('You must first choose a breeding pair,');
     } else {
-      litter = pureColorDogs(litter[fatherIndex], litter[motherIndex], litterColor);
+      generations = pureColorDogs(litter[fatherIndex], litter[motherIndex], litterColor);
       showLitter(litter);
     }
+    $("#generations").empty().append("  --  " + generations + " Generations");
     return false;
   });
 

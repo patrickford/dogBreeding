@@ -273,7 +273,8 @@ function fatDogs(father, mother, goal) {
   console.log('Generations: ' + generation + '  Weight: ' + fattest);
 
   litter = sortByGender(litter);
-  return litter;
+  
+  return generation;
 }
 
 
@@ -331,5 +332,6 @@ function pureColorDogs(father, mother, pureColor) {
   console.log('Generations: ' + generation);
 
   litter = sortByGender(litter);
-  return litter;
+
+  return generation;
 }
